@@ -135,7 +135,16 @@ function countNodes (rootNode) {
 
 function getParentNode (rootNode, target) {
   /* Check to see if rootNode exists */
+  if (!rootNode) return;
 
+  /* Create a stack, and push the starting node to the stack */
+  const stack = [rootNode];
+
+  /* While the stack is not empty, repeat steps */
+  while (stack.length) {
+    let parentNode = stack.pop();
+    if (parentNode.val === target) return parentNode.val;
+  }
 }
 
 function inOrderPredecessor (rootNode, target) {
