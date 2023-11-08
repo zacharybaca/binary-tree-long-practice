@@ -138,12 +138,13 @@ function getParentNode (rootNode, target) {
   if (!rootNode) return;
 
   /* Create a stack, and push the starting node to the stack */
-  const stack = [rootNode];
+  const stack = [];
+  stack.push(rootNode);
 
   /* While the stack is not empty, repeat steps */
   while (stack.length) {
     let parentNode = stack.pop();
-    if (parentNode.val === target) return parentNode.val;
+    if (parentNode.val === target) return null;
   }
 }
 
