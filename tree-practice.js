@@ -96,39 +96,15 @@ function balancedTree (rootNode) {
   /* Check to see if rootNode exists */
   if (!rootNode) return true;
 
-  /* Declare variables for left and right node heights */
-  let left;
-  let right;
+ /* Recursively call getHeight on left nodes and right nodes */
+  const left = getHeight(rootNode.left);
+  const right = getHeight(rootNode.right);
 
-  /* Declare variables for left and right node sums */
-  let leftSum = 0;
-  let rightSum = 0;
+/* Check to see if the difference in absolute value is greater than 1 between the left and right heights */
+  if (Math.abs(left - right) > 1) return false;
 
-  /* Put the starting node in a queue */
-  const queue = [rootNode];
-
-  /* While the queue is not empty, repeat */
-  while (queue.length) {
-    /* Dequeue a node and print it */
-    let currNode = queue.shift();
-
-    /* Get the height of the Left and Right children nodes */
-    left = getHeight(currNode.left);
-    right = getHeight(currNode.right);
-
-    /* Increment the leftSum and rightSum variables to keep track of level count */
-    leftSum += left;
-    rightSum += right;
-
-    /* Put all of the node's children in the back of the queue */
-    if (currNode.left) queue.push(currNode.left);
-    if (currNode.right) queue.push(currNode.right);
-  }
-
-  /* Compare the heights for Left and Right children nodes */
-  console.log('leftSum: ', leftSum);
-  console.log('rightSum: ', rightSum);
-  return leftSum === rightSum;
+/* If the difference in height is not greater than 1, recursively call balancedTree on each sub-tree */
+  return balancedTree(rootNode.left) && balancedTree(rootNode.right);
 
 }
 
